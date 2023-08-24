@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Srcset</title>
+    <style>
+        .w-full {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Case 1: Resolution switching: Different sizes -->
+    <!-- <img class="w-full" srcset="./daniel-small.jpg 600w, ./daniel-medium.jpg 900w, ./daniel-large.jpg 1200w"
+        sizes="(max-width: 600px) 600px, (max-width: 800px) 900px, , (max-width: 1200px) 1200px"
+        src="./daniel-large.jpg" alt="img-case-1"> -->
+
+    <!-- Case 2: Resolution switching: Same size, different resolutions -->
+    <!-- <img class="w-full" srcset="./daniel-small.jpg 1x, ./daniel-medium.jpg 2x, ./daniel-large.jpg 3x" src="./daniel-large.jpg" alt="img-case-1"> -->
+
+    <!-- Case 3: Art direction -->
+    <picture>
+        <source class="w-full" media="(max-width: 800px)" srcset="./zhenyu-small.jpg" />
+        <img class="w-full" src="./zhenyu-medium.jpg" alt="" />
+    </picture>
+</body>
+
+</html>
