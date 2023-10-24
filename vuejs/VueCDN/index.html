@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn</title>
+    <style>
+      .card-container {
+        display: flex;
+        gap: 20px;
+      }
+
+      .card {
+        width: 250px;
+        height: 250px;
+        background: #5a5a5ab7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .image {
+        width: 50px;
+      }
+
+      .card.cart {
+        background: #ffa400;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="card-container">
+        <div
+          class="card"
+          v-for="product in products"
+          :class="{ cart: product.inCart }"
+          @click="onToggleCard(product)"
+        >
+          <h1>{{product.name}}</h1>
+          <p>{{product.price}}</p>
+          <img
+            class="image"
+            :src="product.src"
+            :alt="product.name"
+            :title="product.name"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            products: [
+              {
+                name: "Product 1",
+                price: 100,
+                src: "./assets/p1.jpg",
+                inCart: false,
+              },
+              {
+                name: "Product 2",
+                price: 80,
+                src: "./assets/p2.jpg",
+                inCart: true,
+              },
+              {
+                name: "Product 3",
+                price: 150,
+                src: "./assets/p3.jpg",
+                inCart: false,
+              },
+            ],
+          };
+        },
+        methods: {
+          onToggleCard(prod) {
+            prod.inCart = !prod.inCart;
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

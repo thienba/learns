@@ -1,0 +1,9 @@
+@import "variable";
+
+h1 {
+    color: $red-color;
+}
+
+footer h1{
+    color: $green-color;
+}
