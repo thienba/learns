@@ -1,18 +1,37 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="flip-card" @click="onChoseCard">
-    <div class="flip-card-inner" :class="{ 'is-flipped': active }">
+  <div
+    class="flip-card"
+    :class="{ '!cursor-default': isDisabled }"
+    @click="onToggleFlipCard"
+    :style="{
+      height: `${(920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16}px`,
+      width: `${(((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4}px`,
+      perspective: `${
+        ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4) * 2
+      }px`,
+    }"
+  >
+    <div class="flip-card-inner" :class="{ 'is-flipped': isFlipped }">
       <div class="flip-card-front">
         <img
-          class="w-[50px]"
+          :style="{
+            width: `${
+              (((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 / 3
+            }px`,
+          }"
           src="../../assets/images/icon_back.png"
           alt="icon-back"
         />
       </div>
       <div class="flip-card-back">
         <img
-          class="w-[100px]"
-          :src="require(`../../assets/images/${context}.png`)"
+          :style="{
+            width: `${
+              ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 / 3) * 2
+            }px`,
+          }"
+          :src="require(`../../assets/images/${card.value}.png`)"
           alt="icon-back"
         />
       </div>
@@ -24,18 +43,39 @@
 export default {
   data() {
     return {
-      active: false,
+      isFlipped: false,
+      isDisabled: false,
     };
   },
   props: {
-    context: {
-      type: Number,
+    cardsContext: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+    card: {
+      type: [Number, String, Object, Array],
       required: true,
+    },
+    rules: {
+      type: Array,
     },
   },
   methods: {
-    onChoseCard() {
-      this.active = !this.active;
+    onToggleFlipCard() {
+      if (this.rules.length === 2) return;
+      if (this.isDisabled) return;
+      this.isFlipped = !this.isFlipped;
+      if (this.isFlipped) this.$emit("onFlip", this.card);
+    },
+
+    onFlipBackCard() {
+      this.isFlipped = false;
+    },
+
+    onDisable() {
+      this.isDisabled = true;
     },
   },
 };
@@ -49,6 +89,7 @@ export default {
   perspective: 1000px;
   border-radius: 16px;
   cursor: pointer;
+  user-select: none;
 }
 
 .flip-card-inner {
@@ -56,7 +97,7 @@ export default {
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.6s;
+  transition: transform 1s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -81,14 +122,14 @@ export default {
   background-color: #bbb;
   color: black;
   border-radius: 16px;
-  background:#212121;
+  background: #212121;
 }
 
 .flip-card-back {
   color: white;
   transform: rotateY(180deg);
   border-radius: 16px;
-  background:white;
+  background: white;
 }
 </style>
 >

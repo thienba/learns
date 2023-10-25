@@ -4,13 +4,24 @@
       v-if="statusMatch === 'default'"
       @onStart="onHandleBeforeStart($event)"
     />
-    <interact-screen v-if="statusMatch === 'match'"  :cardsContext="settings.cardsContext" />
+    <interact-screen
+      v-if="statusMatch === 'match'"
+      :cardsContext="settings.cardsContext"
+      :totalOfBlocks="settings.totalOfBlocks"
+      @onFinish="onChangeStatusFinished"
+    />
+    <result-screen
+      v-if="statusMatch === 'finished'"
+      @onRestartGame="onStartAgain"
+      :timer="timer"
+    />
   </div>
 </template>
 
 <script>
 import MainScreen from "./components/MainScreen";
 import InteractScreen from "./components/InteractScreen";
+import ResultScreen from "./components/ResultScreen";
 import { shuffle } from "./utils/array";
 
 export default {
@@ -18,6 +29,7 @@ export default {
   components: {
     MainScreen,
     InteractScreen,
+    ResultScreen,
   },
   data() {
     return {
@@ -27,6 +39,7 @@ export default {
         startedAt: null,
       },
       statusMatch: "default",
+      timer: null,
     };
   },
   methods: {
@@ -42,6 +55,13 @@ export default {
       this.settings.cardsContext = shuffle(shuffle(shuffle(shuffle(shuffle(cards)))));
       this.settings.startedAt = new Date().getTime();
       this.statusMatch = "match";
+    },
+    onChangeStatusFinished() {
+      this.statusMatch = "finished";
+      this.timer = Math.round((new Date().getTime() - this.settings.startedAt) / 1000);
+    },
+    onStartAgain() {
+      this.statusMatch = "default";
     },
   },
 };
