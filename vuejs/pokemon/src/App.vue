@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center w-full h-screen bg-[#212121]">
+  <div class="flex flex-col justify-center items-center w-full min-h-screen bg-[#212121]">
     <main-screen
       v-if="statusMatch === 'default'"
       @onStart="onHandleBeforeStart($event)"

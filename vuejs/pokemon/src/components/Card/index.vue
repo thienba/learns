@@ -4,15 +4,15 @@
     <div class="flip-card-inner" :class="{ 'is-flipped': active }">
       <div class="flip-card-front">
         <img
-          class="w-[30px]"
+          class="w-[50px]"
           src="../../assets/images/icon_back.png"
           alt="icon-back"
         />
       </div>
       <div class="flip-card-back">
         <img
-          class="w-[30px]"
-          src="../../assets/images/1.png"
+          class="w-[100px]"
+          :src="require(`../../assets/images/${context}.png`)"
           alt="icon-back"
         />
       </div>

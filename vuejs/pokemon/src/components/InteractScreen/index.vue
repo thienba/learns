@@ -18,6 +18,11 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      rules: [],
+    };
+  },
 };
 </script>
 <style></style>
