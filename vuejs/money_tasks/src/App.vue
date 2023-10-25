@@ -1,5 +1,6 @@
 <template>
-  <app-nav />
+  <h1>This is a title...</h1>
+  <base-nav />
   <router-view></router-view>
 </template>
 
@@ -9,7 +10,7 @@ import Nav from "./components/Nav";
 export default {
   name: "App",
   components: {
-    AppNav: Nav,
+    BaseNav: Nav,
   },
 };
 </script>

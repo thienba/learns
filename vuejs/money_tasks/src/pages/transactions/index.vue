@@ -2,36 +2,29 @@
 <template>
   <div>
     <h1>Transactions page is here...</h1>
-    <div v-for="tx in txList" :key="tx.id">
-      <router-link :to="{ name: 'transaction-detail-route', params: { id: tx.id } }">
-        {{ tx.title }}
-      </router-link>
-      <p>{{ tx.price }}</p>
+    <div v-if="txList.length">
+      <div v-for="tx in txList" :key="tx.id">
+        <router-link :to="{ name: 'transaction-detail-route', params: { id: tx.id } }">
+          {{ tx.title }}
+        </router-link>
+        <p>{{ tx.price }}</p>
+      </div>
     </div>
+
+    <div v-else>Loading...</div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      txList: [
-        {
-          id: 1,
-          title: "Transaction 1",
-          price: 1242311,
-        },
-        {
-          id: 2,
-          title: "Transaction 2",
-          price: 645433,
-        },
-        {
-          id: 3,
-          title: "Transaction 3",
-          price: 2422311,
-        },
-      ],
+      txList: [],
     };
+  },
+  created() {
+    fetch("http://localhost:3000/transactions")
+      .then((res) => res.json())
+      .then((data) => (this.txList = data));
   },
 };
 </script>

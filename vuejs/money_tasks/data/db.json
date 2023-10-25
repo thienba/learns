@@ -1,0 +1,19 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "title": "Transaction 1",
+      "price": 1242311
+    },
+    {
+      "id": 2,
+      "title": "Transaction 2",
+      "price": 645433
+    },
+    {
+      "id": 3,
+      "title": "Transaction 3",
+      "price": 2422311
+    }
+  ]
+}
