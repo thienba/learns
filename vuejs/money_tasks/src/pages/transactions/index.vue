@@ -2,29 +2,30 @@
 <template>
   <div>
     <h1>Transactions page is here...</h1>
-    <div v-if="txList.length">
-      <div v-for="tx in txList" :key="tx.id">
-        <router-link :to="{ name: 'transaction-detail-route', params: { id: tx.id } }">
-          {{ tx.title }}
+    <div v-if="tsList.length">
+      <div v-for="ts in tsList" :key="ts.id">
+        <router-link :to="{ name: 'transaction-detail-route', params: { id: ts.id } }">
+          {{ ts.title }}
         </router-link>
-        <p>{{ tx.price }}</p>
+        <p>{{ ts.price }}</p>
       </div>
     </div>
-
+    <div v-else-if="error">{{ error.message }}</div>
     <div v-else>Loading...</div>
   </div>
 </template>
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
-  data() {
+  setup() {
+    const store = useStore();
+    store.dispatch("fetchAllTs");
     return {
-      txList: [],
+      tsList: computed(() => store.state.tsList),
+      error: computed(() => store.state.error),
     };
-  },
-  created() {
-    fetch("http://localhost:3000/transactions")
-      .then((res) => res.json())
-      .then((data) => (this.txList = data));
   },
 };
 </script>
