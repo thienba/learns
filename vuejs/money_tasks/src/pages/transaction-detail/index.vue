@@ -6,22 +6,20 @@
       <h3>Price: {{ transaction.title }}</h3>
       <p>Price: {{ transaction.price }}</p>
     </div>
-    <div v-else>
-      Loading...
-    </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      transaction: null,
-    };
+  computed: {
+    ...mapGetters(["transaction"]),
   },
-  created() {
-    fetch(`http://localhost:3000/transactions/${this.$route.params.id}`)
-      .then((res) => res.json())
-      .then((data) => (this.transaction = data));
+  methods: {
+    ...mapActions(["fetchTs"]),
+  },
+  mounted() {
+    this.fetchTs({ id: this.$route.params.id });
   },
 };
 </script>
