@@ -1,9 +1,20 @@
 <template>
-  <h1>Home Page</h1>
+  <div class="p-2">
+    <h1>Home Page</h1>
+    <button
+      type="button"
+      class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+    >
+      Open Modal
+    </button>
+  </div>
 </template>
 
 <script>
 export default {
   name: "IndexPage",
+  methods: {
+   
+  },
 };
 </script>
