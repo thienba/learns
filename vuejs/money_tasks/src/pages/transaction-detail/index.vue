@@ -10,16 +10,20 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 export default {
-  computed: {
-    ...mapGetters(["transaction"]),
-  },
-  methods: {
-    ...mapActions(["fetchTs"]),
-  },
-  mounted() {
-    this.fetchTs({ id: this.$route.params.id });
+  setup() {
+    const route = useRoute();
+    const store = useStore();
+
+    console.log(route.params.id);
+    store.dispatch("fetchTs", { id: route.params.id });
+
+    return {
+      transaction: computed(() => store.state.transaction),
+    };
   },
 };
 </script>
