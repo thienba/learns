@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "module": "es2020",
+    "moduleResolution": "node",
+    "target": "ES6",
+    "sourceMap": true,
+    "allowJs": true
+  }
+}
