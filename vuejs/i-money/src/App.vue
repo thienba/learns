@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col items-center justify-center bg-slate-900 text-white">
-    <div class="w-[450px]">
+    <div class="w-full px-4">
       <component :is="layout">
         <router-view />
       </component>

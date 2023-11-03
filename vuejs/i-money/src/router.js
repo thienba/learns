@@ -1,4 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { fireAuth } from "./configs/firebase";
+
+const authenticate = (to, from, next) => {
+  const user = fireAuth.currentUser;
+  console.log(user);
+  if (!user) next({ name: "login-route" });
+  else next();
+};
 
 const routes = [
   {
@@ -24,6 +32,20 @@ const routes = [
     },
     name: "login-route",
     component: () => import("@/views/login"),
+  },
+  {
+    path: "/profile",
+    meta: {
+      layout: "default-layout",
+    },
+    name: "profile-route",
+    component: () => import("@/views/profile"),
+    beforeEnter: authenticate,
+  },
+  {
+    path: "/logout",
+    name: "logout-route",
+    component: () => import("@/views/logout"),
   },
 ];
 

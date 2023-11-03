@@ -4,9 +4,17 @@ import router from "./router";
 import "./assets/styles/global.css";
 import "./assets/styles/tailwind.css";
 import { regisGlobalComponents } from "./utils/import";
+import { onAuthStateChanged } from "firebase/auth";
+import { fireAuth } from "./configs/firebase";
 
-const app = createApp(App);
+let app;
 
-regisGlobalComponents(app);
-app.use(router);
-app.mount("#app");
+onAuthStateChanged(fireAuth, () => {
+  if (!app) {
+    app = createApp(App);
+
+    regisGlobalComponents(app);
+    app.use(router);
+    app.mount("#app");
+  }
+});

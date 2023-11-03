@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .pb-safe-4 {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom))
+  }
+}

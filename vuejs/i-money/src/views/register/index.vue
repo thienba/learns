@@ -82,7 +82,7 @@ export default {
 
     const onSubmit = async () => {
       await signup(data.fullName, data.email, data.password);
-      if (!error.value) router.push({ name: "login-route" });
+      if (!error.value) router.push({ name: "profile-route" });
     };
 
     return {
@@ -94,4 +94,3 @@ export default {
   },
 };
 </script>
-<style lang=""></style>

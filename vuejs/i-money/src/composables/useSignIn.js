@@ -14,7 +14,6 @@ const signIn = async (email, password) => {
       email,
       password
     );
-    console.log(response);
     return response;
   } catch (err) {
     error.value = err.message;

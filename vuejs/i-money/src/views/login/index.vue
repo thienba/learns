@@ -57,7 +57,7 @@ export default {
 
     const onSubmit = async () => {
       await signIn(data.email, data.password);
-      if (!error.value) router.push({ name: "home-route" });
+      if (!error.value) router.push({ name: "profile-route" });
     };
 
     return {
